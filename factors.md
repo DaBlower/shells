@@ -1,0 +1,5 @@
+- hours spent
+- is it ai? use kmeans for this and ai badge
+- how detailed are your devlogs?
+- how many devlogs do you have?
+- what type of project is it? eg website, app, game

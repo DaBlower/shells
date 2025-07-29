@@ -1,0 +1,7 @@
+updateDatabase.py
+
+2: An Invalid URI host error was received when creating a new MongoClient in updateDatabase.py
+3: Failed to load SOM projects API in updateDatabase.py
+4: Happens when the API doesn't return the page that the program thinks it's on
+5: Failed to parse the SOM API response as JSON
+6: Failed to get projects using API after MAX_RETRIES attemps
