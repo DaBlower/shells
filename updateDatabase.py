@@ -12,8 +12,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-uri = f"mongodb+srv://{os.getenv("MONGO_USERNAME")}:{os.getenv("MONGO_PASSWORD")}@{os.getenv("MONGO_CLUSTER")}.{os.getenv("MONGO_DB_NAME")}.mongodb.net/?retryWrites=true&w=majority&appName={os.getenv("MONGO_APP_NAME")}"
-
+uri = os.getenv("MONGO_URI")
 # Create a new client and connect to the server
 try:
     client = MongoClient(
@@ -205,7 +204,7 @@ async def main():
 
             if project_operations:
                 print(f"Executing {len(project_operations)} project upserts.")
-                batch_size = 200
+                batch_size = 1000
                 for i in range(0, len(project_operations), batch_size):
                     batch = project_operations[i:i+batch_size]
                     try:
