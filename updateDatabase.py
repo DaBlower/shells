@@ -9,6 +9,7 @@ from pymongo import UpdateOne
 from aiohttp import ClientConnectorCertificateError
 from requests.exceptions import SSLError
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 
@@ -215,8 +216,11 @@ async def main():
                 print("Project processing complete.")
             else:
                 print("No project operations needed!")
+        elapsed = time.time() - start_time
+        print(f"Took {elapsed} seconds - {elapsed/60} minutes")
     except Exception as e:
         print(f"Exception in main! {e}")
 
 if __name__ == "__main__":
+    start_time = time.time()
     asyncio.run(main())
