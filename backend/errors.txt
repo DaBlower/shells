@@ -1,4 +1,4 @@
-updateDatabase.py
+updateDatabase.py (not up to date)
 
 2: An Invalid URI host error was received when creating a new MongoClient in updateDatabase.py
 3: Failed to load SOM projects API in updateDatabase.py
