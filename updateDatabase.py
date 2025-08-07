@@ -3,6 +3,7 @@ from pymongo.server_api import ServerApi
 from pymongo.errors import AutoReconnect
 import os
 import sys
+from datetime import datetime
 import asyncio
 import aiohttp
 from pymongo import UpdateOne
@@ -157,6 +158,7 @@ async def main():
                     "id": devlog.get("id"),
                     "attachment": devlog.get("attachment"),
                     "project_id": devlog.get("project_id"),
+                    "last_updated_in_database": datetime.now()
                 }
                 id_filter = {"id": devlog_data["id"]}
                 update = {"$set": devlog_data} # set adds it if it doesn't exist and if it does, then it overwrites it
@@ -197,7 +199,8 @@ async def main():
                     "seconds_coded": project.get("total_seconds_coded"),
                     "followers": len(project.get("followers", [])), # if followers doesn't exist, then just return an empty list
                     "banner": project.get("banner"),
-                    "updated_at": project.get("updated_at")
+                    "updated_at": project.get("updated_at"),
+                    "last_updated_in_database": datetime.now()
                 }
                 id_filter = {"id": project_data["id"]} # the id will be used to check if the project exists already
                 update = {"$set": project_data}
