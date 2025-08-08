@@ -31,22 +31,12 @@ except Exception as e:
     print(f"An Invalid URI host error was received. Is your Atlas host name correct in your connection string? {e}")
     sys.exit(2)
 
-# use a database named "projects"
+# use a database named "shells"
 db = client.shells
 
 # create/use a new collection
 project_collection = db["projects"]
 devlog_collection = db["devlogs"]
-
-# Send a ping to confirm a successful connection
-
-try:
-    client.admin.command('ping')
-except AutoReconnect:
-    pass # ingnore autoreconnect error at startup
-except Exception as e:
-    print(e)
-
 
 # headers
 cookies= {
