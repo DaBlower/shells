@@ -182,7 +182,7 @@ async def main():
                     "title": project.get("title"),
                     "id": project.get("id"),
                     "category": project.get("category"),
-                    "url": f"https://summer.hackclub.com/projects/{project.get("id")}",
+                    "url": f"https://summer.hackclub.com/projects/{project.get('id')}",
                     "description": project.get("description"),
                     "devlog_count": project.get("devlogs_count"),
                     "devlog_ids": project.get("devlogs"),
