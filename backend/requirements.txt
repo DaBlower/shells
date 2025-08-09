@@ -5,6 +5,7 @@ asyncio==3.4.3
 attrs==25.3.0
 certifi==2025.7.14
 charset-normalizer==3.4.2
+colorama==0.4.6
 dnspython==2.7.0
 frozenlist==1.7.0
 idna==3.10
