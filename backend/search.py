@@ -1,6 +1,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
+from colorama import Fore, Style
 import os
 import sys
 
@@ -52,6 +53,10 @@ cursor = project_collection.find(
 print("Results:")
 print(f"Page {page}")
 
+result_count = 0 # if there are no results, then print a error
 for result in cursor:
-    print(f"{result['title']}: {result['description']}")
+    print(f"{Fore.RED}{result['title']}:{Style.RESET_ALL} {result['description']}")
     print("")
+    result_count += 1
+if result_count == 0:
+    print(f"{Fore.RED}No projects found!{Style.RESET_ALL}")
