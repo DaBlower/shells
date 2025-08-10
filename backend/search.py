@@ -46,7 +46,7 @@ skip_count = (page - 1) * page_size
 # run text search using index
 cursor = project_collection.find(
     {"$text": {"$search": query}}, # search using query
-    {"score": {"$meta": "textScore"}, "title": 1, "description": 1} # textScore is the relevance, title and description is what it will return
+    {"score": {"$meta": "textScore"}, "title": 1, "description": 1, "url": 1} # textScore is the relevance, title and description is what it will return
 ).sort([("score", {"$meta": "textScore"})]).skip(skip_count).limit(page_size)
 
 # print results
@@ -56,6 +56,8 @@ print(f"Page {page}")
 result_count = 0 # if there are no results, then print a error
 for result in cursor:
     print(f"{Fore.RED}{result['title']}:{Style.RESET_ALL} {result['description']}")
+    print("")
+    print(f"{Fore.BLUE}{result['url']}{Style.RESET_ALL}")
     print("")
     result_count += 1
 if result_count == 0:
