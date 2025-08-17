@@ -190,6 +190,7 @@ async def main():
                     "followers": len(project.get("followers", [])), # if followers doesn't exist, then just return an empty list
                     "banner": project.get("banner"),
                     "updated_at": project.get("updated_at"),
+                    "user_id": project.get("user_id"),
                     "last_updated_in_database": datetime.now()
                 }
                 id_filter = {"id": project_data["id"]} # the id will be used to check if the project exists already
