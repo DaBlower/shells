@@ -62,3 +62,7 @@ for result in cursor:
     result_count += 1
 if result_count == 0:
     print(f"{Fore.RED}No projects found!{Style.RESET_ALL}")
+
+project = input(f"{Fore.BLUE}Pick a project id{Style.RESET_ALL}: ")
+
+# run classify.py with the project id
