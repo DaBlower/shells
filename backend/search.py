@@ -46,7 +46,7 @@ skip_count = (page - 1) * page_size
 # run text search using index
 cursor = project_collection.find(
     {"$text": {"$search": query}}, # search using query
-    {"score": {"$meta": "textScore"}, "title": 1, "description": 1, "url": 1} # textScore is the relevance, title and description is what it will return
+    {"score": {"$meta": "textScore"}, "title": 1, "description": 1, "url": 1, "id": 1} # textScore is the relevance, title and description is what it will return
 ).sort([("score", {"$meta": "textScore"})]).skip(skip_count).limit(page_size)
 
 # print results
@@ -59,10 +59,8 @@ for result in cursor:
     print("")
     print(f"{Fore.BLUE}{result['url']}{Style.RESET_ALL}")
     print("")
+    print(f"{Fore.BLUE}{result['id']}{Style.RESET_ALL}")
+    print("")
     result_count += 1
 if result_count == 0:
     print(f"{Fore.RED}No projects found!{Style.RESET_ALL}")
-
-project = input(f"{Fore.BLUE}Pick a project id{Style.RESET_ALL}: ")
-
-# run classify.py with the project id
