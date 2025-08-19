@@ -191,10 +191,14 @@ async def main():
                     "banner": project.get("banner"),
                     "updated_at": project.get("updated_at"),
                     "user_id": project.get("user_id"),
-                    "last_updated_in_database": datetime.now()
+                    "last_updated_in_database": datetime.now(),
+                    "multiplier": None
                 }
                 id_filter = {"id": project_data["id"]} # the id will be used to check if the project exists already
-                update = {"$set": project_data}
+                update = {
+                    "$set": project_data,
+                    "$setOnInsert": {"multiplier": None} # only set the multiplier on the first insert
+                }
                 project_operations.append(UpdateOne(id_filter, update, upsert=True)) # upsert will basically add the object no matter if it exists or not
 
             if project_operations:
