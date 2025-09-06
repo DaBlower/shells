@@ -60,3 +60,49 @@ def get_devlogs(project_id):
 
 project_id = input("What is the project id? ")
 get_devlogs(project_id=project_id)
+
+def raw_values(project_id):
+    project = project_collection.find_one({"id": int(project_id)})
+    devlog_ids = project["devlog_ids"]
+    features = {}
+
+ 
+
+    #project description
+    desc = classify.extract_features(project["description"])
+    mean_num_words += desc["num_words"]
+    mean_num_sentences += desc["num_sentences"]
+    mean_mean_sentence_length += desc["mean_sentences_length"]
+    mean_buzz_ratio += desc["buzz_ratio"]
+    mean_punct_ratio += desc["punct_ratio"]
+
+    for devlog_id in devlog_ids:
+        devlog = devlog_collection.find_one({"id": int(devlog_id)})
+        # run classify with the devlog text devlog["text"]
+        features = classify.extract_features(devlog["text"])
+
+        mean_num_words += features["num_words"]
+        mean_num_sentences += features["num_sentences"]
+        mean_mean_sentence_length += features["mean_sentences_length"]
+        mean_buzz_ratio += features["buzz_ratio"]
+        mean_punct_ratio += features["punct_ratio"]
+
+    devlog_count = len(devlog_ids)
+
+    mean_num_words = mean_num_words / (devlog_count + 1)
+    mean_num_sentences = mean_num_sentences / (devlog_count + 1)
+    mean_mean_sentence_length = mean_mean_sentence_length / (devlog_count + 1)
+    mean_buzz_ratio = mean_buzz_ratio / (devlog_count + 1)
+    mean_punct_ratio = mean_punct_ratio / (devlog_count + 1)
+    
+
+    return {
+        "mean_num_words": mean_num_words,
+        "mean_num_sentences": mean_num_sentences,
+        "mean_mean_sentence_length": mean_mean_sentence_length,
+        "mean_buzz_ratio": mean_buzz_ratio,
+        "mean_punct_ratio": mean_punct_ratio,
+        "followers": project["followers"],
+        "seconds_coded": project["seconds_coded"],
+        "multiplier": project["multiplier"]
+    }

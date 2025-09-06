@@ -43,6 +43,8 @@ def load_buzzwords():
         buzzwords = [w.strip() for w in content.split(",") if w.strip()]
 
 def extract_features(text):
+    if not buzzwords:
+        load_buzzwords()
     sentences = re.split(r'(?<=[.!?])\s+', text.strip()) # split text into array
     sentences = [s for s in sentences if s] # filter out blank parts
 
