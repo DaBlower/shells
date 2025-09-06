@@ -191,6 +191,7 @@ async def main():
                     "banner": project.get("banner"),
                     "updated_at": project.get("updated_at"),
                     "user_id": project.get("user_id"),
+                    "is_shipped": project.get("is_shipped"),
                     "last_updated_in_database": datetime.now(),
                     "multiplier": None
                 }
