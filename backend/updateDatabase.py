@@ -3,7 +3,7 @@ from pymongo.server_api import ServerApi
 from pymongo.errors import AutoReconnect
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 import asyncio
 import aiohttp
 from pymongo import UpdateOne
@@ -192,8 +192,7 @@ async def main():
                     "updated_at": project.get("updated_at"),
                     "user_id": project.get("user_id"),
                     "is_shipped": project.get("is_shipped"),
-                    "last_updated_in_database": datetime.now(),
-                    "multiplier": None
+                    "last_updated_in_database": datetime.now(timezone.utc),
                 }
                 id_filter = {"id": project_data["id"]} # the id will be used to check if the project exists already
                 update = {
