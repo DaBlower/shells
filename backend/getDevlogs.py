@@ -58,9 +58,6 @@ def get_devlogs(project_id):
     mean_ai_score = devlog_ai_score / len(devlog_ids)
     print(f"{Fore.BLUE}AI SCORE: {Fore.BLUE}{mean_ai_score*100:.2f}%{Style.RESET_ALL }")
 
-project_id = input("What is the project id? ")
-get_devlogs(project_id=project_id)
-
 def raw_values(project_id):
     project = project_collection.find_one({"id": int(project_id)})
     devlog_ids = project["devlog_ids"]
@@ -70,6 +67,12 @@ def raw_values(project_id):
 
     #project description
     desc = classify.extract_features(project["description"])
+    mean_num_words = 0
+    mean_num_sentences = 0
+    mean_mean_sentence_length = 0
+    mean_buzz_ratio = 0
+    mean_punct_ratio = 0
+
     mean_num_words += desc["num_words"]
     mean_num_sentences += desc["num_sentences"]
     mean_mean_sentence_length += desc["mean_sentences_length"]
@@ -103,6 +106,5 @@ def raw_values(project_id):
         "mean_buzz_ratio": mean_buzz_ratio,
         "mean_punct_ratio": mean_punct_ratio,
         "followers": project["followers"],
-        "seconds_coded": project["seconds_coded"],
-        "multiplier": project["multiplier"]
+        "seconds_coded": project["seconds_coded"]
     }
